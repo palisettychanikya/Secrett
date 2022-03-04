@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
             val email = edtEmail.text.toString()
             val password = edtPassword.text.toString()
-            if (email.isNotEmpty() || password.isNotEmpty()){
+            if (email.isNotEmpty() && password.isNotEmpty()){
                 login(email,password)
 
             }else{

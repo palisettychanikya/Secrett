@@ -35,7 +35,7 @@ class ChatActivity : AppCompatActivity() {
 
         val name =intent.getStringExtra("name")
         val receiverUid = intent.getStringExtra("uid")
-        val receiverPublicKey = intent.getStringExtra("receiverPublicKey")
+        //val receiverPublicKey = intent.getStringExtra("receiverPublicKey")
 
 
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
@@ -69,10 +69,10 @@ class ChatActivity : AppCompatActivity() {
                     for(postSnapShot in snapshot.children){
                         val message = postSnapShot.getValue(Message::class.java)
                         //todo add decryption here
-                        val decryptM = MessageDecryption()
-                        val deMessage= decryptM.dMessage(message?.message,receiverPublicKey)
-                        val newMessage = Message(deMessage, message?.senderId)
-                        messageList.add(newMessage)
+                      //  val decryptM = MessageDecryption()
+                       // val deMessage= decryptM.dMessage(message?.message,receiverPublicKey)
+                      //  val newMessage = Message(deMessage, message?.senderId)
+                        messageList.add(message!!)
                     }
                     messageAdapter.notifyDataSetChanged()
                 }
@@ -88,9 +88,9 @@ class ChatActivity : AppCompatActivity() {
             val message=messageBox.text.toString()
             //todo add encryption here
 
-            val encryptM = MessageEncryption()
-            val deMessage= encryptM.enMessage(message,receiverPublicKey)
-            val messageObjects = Message(deMessage,senderUid)
+           // val encryptM = MessageEncryption()
+           // val deMessage= encryptM.enMessage(message,receiverPublicKey)
+            val messageObjects = Message(message,senderUid)
 
             mDbRef.child("chats").child(senderRoom!!).child("messages").push()
                 .setValue(messageObjects).addOnSuccessListener {

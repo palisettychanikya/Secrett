@@ -6,15 +6,15 @@ class User {
    var name: String? = null
    var email:String? = null
    var uid:  String?=null
-   var publicKey : String? = null
+  // var publicKey : String? = null
     constructor(){
 
     }
-    constructor(name: String?, emali: String?, uid: String?, publicKey: String?){
+    constructor(name: String?, email: String?, uid: String?){//, publicKey: String?){
         this.email=email
         this.name=name
         this.uid=uid
-        this .publicKey= publicKey
+      //  this .publicKey= publicKey
     }
 
 }

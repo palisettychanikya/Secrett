@@ -27,7 +27,7 @@ class UserAdapter(val context: Context,val userList: ArrayList<User>):RecyclerVi
             val intent =Intent(context,ChatActivity::class.java)
             intent.putExtra("name",currentUser.name)
             intent.putExtra("uid", currentUser.uid)
-            intent.putExtra("receiverPublicKey",currentUser.publicKey)
+            //intent.putExtra("receiverPublicKey",currentUser.publicKey)
             context.startActivity(intent)
         }
     }

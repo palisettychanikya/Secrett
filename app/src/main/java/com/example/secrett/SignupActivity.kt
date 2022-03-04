@@ -3,6 +3,7 @@ package com.example.secrett
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +20,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
     private  lateinit var mAuth: FirebaseAuth
     private lateinit var mdbRef : DatabaseReference
+    lateinit var name: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
@@ -37,10 +39,11 @@ class SignupActivity : AppCompatActivity() {
 
 
         btnSignup.setOnClickListener {
+             name = edtName.text.toString()
             val email = edtEmail.text.toString()
-            val name = edtName.text.toString()
             val password = edtPassword.text.toString()
-            if (email.isNotEmpty() || password.isNotEmpty() || name.isNotEmpty()){
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()){
+
                 signup(name,email,password)
 
             }else{
@@ -60,9 +63,9 @@ class SignupActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
 
                       //todo public key here while creating user
-                          val createPublic = PublicKeyCreator()
-                    val publicKey : String = createPublic.createPublic()
-                     addUserToDatabase(name,email, mAuth.currentUser?.uid!!,publicKey)
+                      //    val createPublic = PublicKeyCreator()
+                   // val publicKey // : String = createPublic.createPublic()
+                     addUserToDatabase(name,email, mAuth.currentUser?.uid!!)//,publicKey)
                     val intent = Intent(this@SignupActivity,MainActivity::class.java)
                     finish()
                     startActivity(intent)
@@ -78,9 +81,9 @@ class SignupActivity : AppCompatActivity() {
         name: String,
         email: String,
         uid:String,
-        publicKey: String
+       // publicKey: String
     ){
   mdbRef =FirebaseDatabase.getInstance().reference
-        mdbRef.child("user").child(uid).setValue(User(name,email,uid,publicKey))
+        mdbRef.child("user").child(uid).setValue(User(name,email,uid))//,publicKey))
     }
 }

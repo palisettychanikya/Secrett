@@ -11,5 +11,6 @@
     <color name="blue">#0000ff</color>
     <color name="red">#ff0000</color>
     <color name="orange">#ff9933</color>
-
+    <color name="pale_golden_rode">#EEE8AA</color>
+    <color name="chartreuse">#7FFF00</color>
 </resources>

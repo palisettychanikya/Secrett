@@ -130,7 +130,7 @@ import javax.crypto.spec.DHPublicKeySpec;return  myPublicKey.toString();
 
 }*/
 
-public class PublicKeyCreator {
+public class Crypter {
 
     public static String encryptMessage(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException {
       // generates unique id

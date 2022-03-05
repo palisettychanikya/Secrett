@@ -43,6 +43,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:20.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
+    implementation 'androidx.compose.foundation:foundation-layout:1.1.1'
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.google.firebase:firebase-bom:29.1.0'
     //implementation 'com.google.firebase:firebase-analytics'

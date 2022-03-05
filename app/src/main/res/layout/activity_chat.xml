@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".Chat">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/chatRecyclerView"
         android:layout_above="@+id/linearLayout"
-     android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +36,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/sentButton"
+            android:onClick="sendMessage"
             android:background="@drawable/send_button"
             android:layout_weight="20"/>
 

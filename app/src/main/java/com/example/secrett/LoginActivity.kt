@@ -29,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
 
         btnSignup.setOnClickListener {
             val intent = Intent(this@LoginActivity ,SignupActivity::class.java)
-            finish()
             startActivity(intent)
+            finish()
         }
 
 
@@ -57,7 +57,6 @@ private fun login(email: String,password : String){
                 // Sign in success, update UI with the signed-in user's information
 
                 val intent = Intent(this@LoginActivity,MainActivity::class.java)
-
                 startActivity(intent)
 
             } else {

@@ -1,7 +1,5 @@
 package com.example.secrett
 
-import com.example.secrett.crypter.PublicKeyCreator
-
 class User {
    var name: String? = null
    var email:String? = null

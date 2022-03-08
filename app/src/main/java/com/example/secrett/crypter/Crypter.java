@@ -161,16 +161,19 @@ public class Crypter {
     }
 
     private static String[] parseMessageToArray(String message) {
-      String temp = message.substring(1, message.length() - 1);
+      String temp = message.substring(1, message.length()-1 );
+
       int messageAreaIndex = temp.indexOf("], ") + 1;
 
       String messageText = temp.substring(0, messageAreaIndex);
 
       String secondArea = temp.substring(messageAreaIndex + 2);
-      String[] shaAndPublicIdentity = secondArea.split(", ");
+
+      String[] shaAndPublicIdentity = secondArea.split(",");
 
       String sha256Text = shaAndPublicIdentity[0];
-      String publicIdentityText = shaAndPublicIdentity[1];
+
+      String publicIdentityText = shaAndPublicIdentity[shaAndPublicIdentity.length-1];
 
       return new String[]{messageText, sha256Text, publicIdentityText};
     }
@@ -191,22 +194,31 @@ public class Crypter {
       return hexString.toString();
     }
 
-    private static int generatePrivateNumberKey(String publicIdentity) {
+    private static int generatePrivateNumberKey(String publicIdentity)throws ArithmeticException {
+     // System.out.println(publicIdentity);
       char[] privateKeyCharArray = publicIdentity.toCharArray();
+      //System.out.println(privateKeyCharArray);
       Set<Integer> uniquePrivateKeyNumbers = new HashSet<>();
-
+       int i =1;
       for (char character : privateKeyCharArray) {
         if (Character.isDigit(character)) {
           uniquePrivateKeyNumbers.add((int) character);
+         // System.out.println(uniquePrivateKeyNumbers);
         }
       }
 
       int sumOfUniqueNumbers = 0;
       for (int number : uniquePrivateKeyNumbers) {
         sumOfUniqueNumbers += number;
+        i++;
+       // System.out.println(sumOfUniqueNumbers);
       }
+     // System.out.println(sumOfUniqueNumbers);
+     // System.out.println(uniquePrivateKeyNumbers.size());
+     // System.out.println(sumOfUniqueNumbers/uniquePrivateKeyNumbers.size());
 
-      return sumOfUniqueNumbers / uniquePrivateKeyNumbers.size();
+       return (int) sumOfUniqueNumbers / i;
+
     }
 
     private static int getRandomNumber() {
@@ -251,25 +263,39 @@ public class Crypter {
     }
 
     private static int getEncryptedMessageLength(String encryptedMessage) {
-      String temp = encryptedMessage.substring(1, encryptedMessage.length() - 1);
+        //System.out.println(encryptedMessage.length());
+      String temp = encryptedMessage.replace("["," ");
+      temp = temp.replace("]"," ");
+      temp = temp.trim();//substring(1, encryptedMessage.length() - 1);
+       // System.out.println(temp);
       temp = temp.replaceAll(", ", "-");
+        //System.out.println(temp);
       String[] messageArray = temp.split("-");
-
+        //System.out.println(messageArray.length);
       return messageArray.length;
     }
 
     private static String decryptMessageWithXOR(String encryptedMessage, int createdNumber) {
-      String temp = encryptedMessage.substring(1, encryptedMessage.length() - 1);
+        //System.out.println(encryptedMessage);
+        //System.out.println(createdNumber);
+        //String temp = encryptedMessage.substring(1, encryptedMessage.length() - 1);
+        String temp = encryptedMessage.replace("["," ");
+        temp = temp.replace("]"," ");
+        temp = temp.trim();
+        //System.out.println(temp);
       temp = temp.replaceAll(", ", "-");
-
+        //System.out.println(temp);
       String[] messageArray = temp.split("-");
-
+        //System.out.println(messageArray);
       StringBuilder result = new StringBuilder();
       for (String s : messageArray) {
+         // System.out.println(s);
+          if (!s.equals(" ")){
         int firstDecrypt = createdNumber ^ Integer.parseInt(s) ^ createdNumber;
         int secondDecrypt = createdNumber ^ firstDecrypt;
-
         result.append((char) secondDecrypt);
+          }
+
       }
 
       return result.toString();
